@@ -1,0 +1,16 @@
+# ninja log v5
+200	2657	7682569841600000	CMakeFiles/openmp_sssp.dir/src/GraphCSR.cpp.obj	5cd18a291025a6e9
+167	2990	7682569844900000	CMakeFiles/openmp_sssp.dir/main.cpp.obj	dc06fee4c2db0890
+90	136	0	clean	8c45b54705a541e8
+80	1661	7682570056290000	CMakeFiles/openmp_sssp.dir/src/GraphCSR.cpp.obj	5cd18a291025a6e9
+65	2023	7682570059830000	CMakeFiles/openmp_sssp.dir/main.cpp.obj	dc06fee4c2db0890
+89	147	0	clean	8c45b54705a541e8
+86	1694	7682572290070000	CMakeFiles/openmp_sssp.dir/src/GraphCSR.cpp.obj	5cd18a291025a6e9
+72	1740	7682572290230000	CMakeFiles/openmp_sssp.dir/main.cpp.obj	dc06fee4c2db0890
+101	1747	7682572290360000	CMakeFiles/openmp_sssp.dir/src/SsspUpdater.cpp.obj	584d27f939d17582
+1751	5867	7682572329610000	openmp_sssp.exe	f9dc30c71854ba82
+65	114	0	clean	8c45b54705a541e8
+96	1641	7682572501040000	CMakeFiles/openmp_sssp.dir/src/GraphCSR.cpp.obj	5cd18a291025a6e9
+113	1679	7682572501310000	CMakeFiles/openmp_sssp.dir/src/SsspUpdater.cpp.obj	584d27f939d17582
+84	1689	7682572501510000	CMakeFiles/openmp_sssp.dir/main.cpp.obj	dc06fee4c2db0890
+1694	3242	7682572514260000	openmp_sssp.exe	f9dc30c71854ba82

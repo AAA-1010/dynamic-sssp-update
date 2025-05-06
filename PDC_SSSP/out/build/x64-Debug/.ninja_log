@@ -1,0 +1,15 @@
+# ninja log v5
+64	1712	7682551414850000	build.ninja	5f91156f6bd15779
+281	7214	7682545597660000	CMakeFiles/serial_sssp.dir/main.cpp.obj	180603bd3f2bc2d0
+2380	3828	7682525259000000	serial_sssp.exe	b62148b4b7c39ec
+361	6499	7682545590560000	CMakeFiles/serial_sssp.dir/src/SsspUpdater.cpp.obj	752fd9030f3c8c85
+214	556	0	clean	8c45b54705a541e8
+322	6740	7682545593220000	CMakeFiles/serial_sssp.dir/src/GraphCSR.cpp.obj	21994c686178a946
+533	7386	7682545599580000	CMakeFiles/openmp_sssp.dir/src/SsspUpdater.cpp.obj	581b18510dcd0be0
+489	7592	7682545601660000	CMakeFiles/openmp_sssp.dir/src/GraphCSR.cpp.obj	8ffe42de4a7d5e9e
+444	7802	7682545603690000	CMakeFiles/openmp_sssp.dir/main.cpp.obj	56064b831e797611
+127	255	0	clean	8c45b54705a541e8
+157	3145	7682551524690000	CMakeFiles/serial_sssp.dir/src/GraphCSR.cpp.obj	21994c686178a946
+132	3198	7682551524740000	CMakeFiles/serial_sssp.dir/main.cpp.obj	180603bd3f2bc2d0
+191	3231	7682551525260000	CMakeFiles/serial_sssp.dir/src/SsspUpdater.cpp.obj	752fd9030f3c8c85
+3239	5643	7682551545480000	serial_sssp.exe	b62148b4b7c39ec
