@@ -1,0 +1,11 @@
+dataset,batch_size,time_ms,version
+grqc,1000,12.9599,openmp
+grqc,2000,10.2517,openmp
+grqc,5000,24.9532,openmp
+grqc,10000,44.3409,openmp
+grqc,15000,53.4983,openmp
+roadNet-CA,1000,3280.62,openmp
+roadNet-CA,2000,2787.96,openmp
+roadNet-CA,5000,2522.4,openmp
+roadNet-CA,10000,2661.2,openmp
+roadNet-CA,15000,2826.53,openmp

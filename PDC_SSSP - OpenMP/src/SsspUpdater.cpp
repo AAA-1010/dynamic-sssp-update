@@ -11,6 +11,7 @@ namespace {
     using Pair = std::pair<float, Vertex>;   // (dist,u)
 }
 
+/* rebuild CSR from edge list */
 static GraphCSR rebuild(const EdgeList& edges) {
     Vertex n = edges.max_vertex_id() + 1;
     return GraphCSR::build_from_edges(n, edges.vec(), true);
@@ -30,7 +31,7 @@ SerialUpdater::SerialUpdater(const EdgeList& edges)
     _next_sib.assign(n, static_cast<Vertex>(-1));
 }
 
-/* ---------- full Dijkstra (baseline) ---------- */
+/* ---------- full Dijkstra ---------- */
 void SerialUpdater::initialise(Vertex source)
 {
     _g = rebuild(_edges);
@@ -64,7 +65,7 @@ void SerialUpdater::initialise(Vertex source)
     build_tree_from_parents();
 }
 
-/* build child‑sibling lists */
+/* ---------- helpers ---------- */
 void SerialUpdater::build_tree_from_parents()
 {
     std::fill(_child_head.begin(), _child_head.end(), static_cast<Vertex>(-1));
@@ -78,7 +79,6 @@ void SerialUpdater::build_tree_from_parents()
     }
 }
 
-/* DFS invalidate subtree */
 void SerialUpdater::mark_subtree_invalid(Vertex root)
 {
     std::vector<Vertex> stk = { root };
@@ -92,10 +92,9 @@ void SerialUpdater::mark_subtree_invalid(Vertex root)
     }
 }
 
-/* classic relaxation helper */
 void SerialUpdater::relax(Vertex u, Vertex v, Weight w, bool& any_change)
 {
-    if (!_valid[u]) return;        // u unreachable => cannot improve v
+    if (!_valid[u]) return;
     float nd = _dist[u] + w;
     if (nd < _dist[v]) {
         _dist[v] = nd;
@@ -105,23 +104,27 @@ void SerialUpdater::relax(Vertex u, Vertex v, Weight w, bool& any_change)
     }
 }
 
-/* ---------- incremental update (now with OpenMP) ---------- */
+/* ---------- incremental update (OpenMP) ---------- */
 void SerialUpdater::apply_changes(const std::vector<Change>& batch,
     Vertex source)
 {
-    /* STEP A: first‑order effects (parallel over batch) */
+    /* STEP A – first‑order effects */
 #pragma omp parallel for schedule(static)
     for (int i = 0; i < static_cast<int>(batch.size()); ++i) {
         const auto& ch = batch[i];
         bool dummy = false;
 
         if (ch.op == Op::Insert) {
+#pragma omp critical(edge_mod)
             _edges.add(ch.u, ch.v, ch.w);
+
             relax(ch.u, ch.v, ch.w, dummy);
             relax(ch.v, ch.u, ch.w, dummy);
         }
         else { // Delete
+#pragma omp critical(edge_mod)
             _edges.remove(ch.u, ch.v);
+
             if (_parent[ch.u] == ch.v)      mark_subtree_invalid(ch.u);
             else if (_parent[ch.v] == ch.u) mark_subtree_invalid(ch.v);
         }
@@ -130,7 +133,7 @@ void SerialUpdater::apply_changes(const std::vector<Change>& batch,
     /* rebuild CSR once */
     _g = rebuild(_edges);
 
-    /* STEP B: propagation loop (parallel over vertices) */
+    /* STEP B – propagation loop */
     const auto& off = _g.offsets();
     const auto& adj = _g.adj();
     const auto& w = _g.w();
@@ -142,6 +145,7 @@ void SerialUpdater::apply_changes(const std::vector<Change>& batch,
 #pragma omp parallel for schedule(dynamic,256) reduction(|:again)
         for (int i = 0; i < static_cast<int>(_g.num_vertices()); ++i) {
             Vertex u = static_cast<Vertex>(i);
+
             if (!_affected[u]) continue;
             _affected[u] = 0;
 

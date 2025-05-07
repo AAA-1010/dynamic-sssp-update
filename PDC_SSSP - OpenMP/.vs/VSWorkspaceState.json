@@ -9,9 +9,8 @@
     "",
     "\\data",
     "\\include",
-    "\\out\\build",
     "\\src"
   ],
-  "SelectedNode": "\\include\\EdgeList.hpp",
+  "SelectedNode": "\\main.cpp",
   "PreviewInSolutionExplorer": false
 }
