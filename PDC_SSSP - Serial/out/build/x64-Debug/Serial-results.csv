@@ -1,0 +1,11 @@
+dataset,batch_size,time_ms,version
+grqc,1000,5.7142,serial
+grqc,2000,6.2626,serial
+grqc,5000,20.027,serial
+grqc,10000,21.8481,serial
+grqc,15000,33.2654,serial
+roadNet-CA,1000,9504.99,serial
+roadNet-CA,2000,6353.76,serial
+roadNet-CA,5000,6579.2,serial
+roadNet-CA,10000,6254.07,serial
+roadNet-CA,15000,6239.69,serial
